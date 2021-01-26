@@ -1,6 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Владислав Журкин](https://up.htmlacademy.ru/javascript/22/user/1153943).
+
 * Наставник: `Алексей Михеев`.
 (https://htmlacademy.ru/profile/id454457).
 ---
