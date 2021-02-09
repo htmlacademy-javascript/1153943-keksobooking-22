@@ -50,8 +50,7 @@ function generateLocation() {
 }
 
 function getArrayElement(items) {
-  const rand = Math.floor(Math.random() * items.length);
-  return items[rand];
+  return items[getRandomInt(0, items.length - 1)];
 }
 
 const getRandomArrayElements = (array, amount) => array.sort(() => Math.random() - Math.random()).slice(0, amount);
