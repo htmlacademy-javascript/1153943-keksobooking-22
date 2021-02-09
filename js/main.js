@@ -36,7 +36,6 @@ function getRandomInt(min, max) {
   return Math.floor(getRandomArbitary(min, max));
 }
 
-
 function getRandomToFixed(min, max, numberOfSigns) {
   const number = getRandomArbitary(min, max);
 
@@ -50,9 +49,14 @@ function generateLocation() {
   }
 }
 
+function getArrayElement(items) {
+  const rand = Math.floor(Math.random() * items.length);
+  return items[rand];
+}
+
 const getRandomArrayElements = (array, amount) => array.sort(() => Math.random() - Math.random()).slice(0, amount);
 
-function getRandomAvatar() {
+function getAvatar() {
   const obj = [];
 
   for (let i = 0; i < QUANTITY_OBJ; i++) {
@@ -65,23 +69,24 @@ function getRandomAvatar() {
   return obj;
 }
 
-function getRandomOffer(location) {
+function getOffer() {
   const obj = [];
 
   for (let i = 0; i < QUANTITY_OBJ; i++) {
+    const location = generateLocation();
     obj.push (
       {
         title: `Заголовок номер ${getRandomInt(1, 10)}`,
         address: `${location.x}, ${location.y}`,
         price: getRandomInt(1000, 100000),
-        type: TYPES[getRandomInt(0, TYPES.length - 1)],
+        type: getArrayElement(TYPES),
         rooms: getRandomInt(1, 4),
         guests: getRandomInt(1, 5),
-        checkin: CHECKINS[getRandomInt(0, CHECKINS.length - 1)],
-        checkout: CHECKOUTS[getRandomInt(0, CHECKOUTS.length - 1)],
+        checkin: getArrayElement(CHECKINS),
+        checkout: getArrayElement(CHECKOUTS),
         features: getRandomArrayElements(FEATURES, getRandomInt(1, 6)),
-        description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.length - 1)],
-        photos: PHOTOS[getRandomInt(0, PHOTOS.length - 1)],
+        description: getArrayElement(DESCRIPTIONS),
+        photos: getArrayElement(PHOTOS),
       })
   }
 
@@ -94,16 +99,16 @@ function getRandomLocation() {
   for (let i = 0; i < QUANTITY_OBJ; i++) {
     obj.push (
       {
-        avatar: 'img/avatars/user'+ 0 + getRandomInt(MIN_AVATAR, MAX_AVATAR) + '.png',
+        x: getRandomToFixed(X_COORDINATES.min, X_COORDINATES.max, 5),
+        y: getRandomToFixed(Y_COORDINATES.min, Y_COORDINATES.max, 5),
       })
   }
 
   return obj;
 }
 
-const coordinates = generateLocation();
-const author = getRandomAvatar();
-const offer = getRandomOffer(coordinates);
+const author = getAvatar();
+const offer = getOffer();
 const locations = getRandomLocation();
 
 console.log(author);
